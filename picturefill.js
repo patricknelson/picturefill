@@ -18,8 +18,12 @@
 				// See if which sources match
 				for( var j = 0, jl = sources.length; j < jl; j++ ){
 					var media = sources[ j ].getAttribute( "data-media" );
-					// if there's no media specified, OR w.matchMedia is supported 
-					if( !media || ( w.matchMedia && w.matchMedia( media ).matches ) ){
+					// if there's no media specified, OR w.matchMedia is supported
+					if (!media) {
+						// Make sure this goes at the top.
+						matches.unshift( sources[ j ] );
+					} else if (w.matchMedia && w.matchMedia( media ).matches){
+						// Last in line.
 						matches.push( sources[ j ] );
 					}
 				}
